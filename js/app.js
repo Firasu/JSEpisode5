@@ -61,6 +61,19 @@ const createNewMessage = function(messageObj) {
  * - Don't forget to clear the message input.
  *****************************************************/
 const sendMessage = function() {
+let data =  {username:  usernameInput.value,
+             message:   messageInput.value}
+
+
+  axios.post("http://192.168.100.54/messages/create/", data)
+    .then(function (response) {
+      console.log(response);
+      createNewMessage(data);
+      usernameInput.value = "";
+      messageinput.value = "";
+    })
+    .catch(error => console.log(error));
+
   // Complete me!
 };
 
@@ -75,8 +88,17 @@ const sendMessage = function() {
  *		(you can use createNewMessage to do this)
  *****************************************************/
 const getNewMessages = function() {
-  // Complete me!
+  // Complete me!\
+  axios.get("http://192.168.100.54/messages/")
+    .then(response => response.data)
+    .then(data => createNewMessage(data))
+    .catch(error => console.log(error));
 };
+
+      // do something with the data
+
+
+
 
 /*****************************************************************
  * Edit Username:
